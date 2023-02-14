@@ -1,5 +1,10 @@
 //! A module to calculate areas enclosed by a path using green's theorem.
 //! Here we integrate over x dy.
+//!
+//! The difference in area between two jigsaw edges is our measure of how
+//! different they are. This does not account for the edge length, which
+//! we normalize. It also does not account for the possibility to "flip"
+//! the edge.
 
 pub fn for_path(path: &[(f32, f32)]) -> f32 {
     let mut area = 0.0;

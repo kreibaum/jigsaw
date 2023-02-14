@@ -1,7 +1,7 @@
 mod area;
 mod edge;
 mod point;
-use plotters::prelude::*;
+use plotters::{prelude::*, style::full_palette::GREEN_700};
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Sets up the backend drawing area.
@@ -21,7 +21,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // This draws a few points on the chart
     edge::example_spline().draw_control_points(&mut chart)?;
-    edge::example_spline().draw_line(&mut chart)?;
+    edge::example_spline().draw_line(&BLUE, &mut chart)?;
+    edge::second_example_spline().draw_line(&GREEN_700, &mut chart)?;
     println!(
         "Area: {}",
         area::for_path(&edge::example_spline().as_path())

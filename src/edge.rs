@@ -36,6 +36,20 @@ pub fn example_spline() -> CatRomSpline {
     }
 }
 
+pub fn second_example_spline() -> CatRomSpline {
+    CatRomSpline {
+        points: vec![
+            Point { x: 0.0, y: 0.0 },
+            Point { x: 0.47, y: 0.03 },
+            Point { x: 0.4, y: 0.3 },
+            Point { x: 0.5, y: 0.45 },
+            Point { x: 0.70, y: 0.2 },
+            Point { x: 0.62, y: -0.05 },
+            Point { x: 1.0, y: 0.0 },
+        ],
+    }
+}
+
 impl CatRomSpline {
     pub fn draw_control_points(
         &self,
@@ -51,6 +65,7 @@ impl CatRomSpline {
     }
     pub fn draw_line(
         &self,
+        color: &RGBColor,
         chart: &mut ChartContext<BitMapBackend, Cartesian2d<RangedCoordf32, RangedCoordf32>>,
     ) -> Result<(), Box<dyn std::error::Error>> {
         // For the first iteration, we only draw the line between points 1 and 2.
@@ -58,7 +73,7 @@ impl CatRomSpline {
 
         let pts = self.as_path();
 
-        chart.draw_series(LineSeries::new(pts, &BLUE))?;
+        chart.draw_series(LineSeries::new(pts, color))?;
 
         Ok(())
     }
