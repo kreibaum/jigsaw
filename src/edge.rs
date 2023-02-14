@@ -56,6 +56,14 @@ impl CatRomSpline {
         // For the first iteration, we only draw the line between points 1 and 2.
         // We also use points 0 and 3 as control points.
 
+        let pts = self.as_path();
+
+        chart.draw_series(LineSeries::new(pts, &BLUE))?;
+
+        Ok(())
+    }
+
+    pub fn as_path(&self) -> Vec<(f32, f32)> {
         let mut pts = Vec::new();
         for i in 0..(self.points.len() - 1) {
             let i: usize = i;
@@ -67,10 +75,7 @@ impl CatRomSpline {
             ];
             pts.extend(interpolate_section(p, 20));
         }
-
-        chart.draw_series(LineSeries::new(pts, &BLUE))?;
-
-        Ok(())
+        pts
     }
 }
 

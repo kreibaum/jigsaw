@@ -1,6 +1,7 @@
+mod area;
 mod edge;
 mod point;
-use plotters::{coord::types::RangedCoordf32, prelude::*};
+use plotters::prelude::*;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Sets up the backend drawing area.
@@ -21,6 +22,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     // This draws a few points on the chart
     edge::example_spline().draw_control_points(&mut chart)?;
     edge::example_spline().draw_line(&mut chart)?;
+    println!(
+        "Area: {}",
+        area::for_path(&edge::example_spline().as_path())
+    );
 
     root.present()?;
 
