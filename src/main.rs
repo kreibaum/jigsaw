@@ -1,4 +1,6 @@
-use plotters::prelude::*;
+mod edge;
+mod point;
+use plotters::{coord::types::RangedCoordf32, prelude::*};
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Sets up the backend drawing area.
@@ -26,12 +28,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         .legend(|(x, y)| PathElement::new(vec![(x, y), (x + 20, y)], RED));
 
     // This draws a few points on the chart
-    chart.draw_series(PointSeries::of_element(
-        vec![(0.0, 0.0), (1.0, 0.0), (0.5, 0.4)],
-        5,
-        &RED,
-        &|c, s, st| EmptyElement::at(c) + Circle::new((0, 0), s, st.filled()),
-    ))?;
+    edge::example_spline().draw_control_points(&mut chart)?;
+    edge::example_spline().draw_line(&mut chart)?;
 
     // This draws the legend on the chart.
     chart
