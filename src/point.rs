@@ -1,3 +1,6 @@
+// To check if two points are basically equal.
+const EPSILON: f32 = 0.0001;
+
 #[derive(Debug, Copy, Clone)]
 pub struct Point {
     pub(crate) x: f32,
@@ -10,6 +13,9 @@ impl Point {
     }
     pub fn abs(&self) -> f32 {
         (self.x * self.x + self.y * self.y).sqrt()
+    }
+    pub fn basically_equal(&self, other: Point) -> bool {
+        (self.x - other.x).abs() < EPSILON && (self.y - other.y).abs() < EPSILON
     }
 }
 

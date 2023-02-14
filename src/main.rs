@@ -18,25 +18,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     // This draws the coordinate system & axis
     chart.configure_mesh().draw()?;
 
-    // This draws a line from an explicit list of points (generated on the fly)
-    chart
-        .draw_series(LineSeries::new(
-            (-50..=50).map(|x| x as f32 / 50.0).map(|x| (x * x, x)),
-            &RED,
-        ))?
-        .label("y = x^2")
-        .legend(|(x, y)| PathElement::new(vec![(x, y), (x + 20, y)], RED));
-
     // This draws a few points on the chart
     edge::example_spline().draw_control_points(&mut chart)?;
     edge::example_spline().draw_line(&mut chart)?;
-
-    // This draws the legend on the chart.
-    chart
-        .configure_series_labels()
-        .background_style(WHITE.mix(0.8))
-        .border_style(BLACK)
-        .draw()?;
 
     root.present()?;
 
