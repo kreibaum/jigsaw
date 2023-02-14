@@ -1,6 +1,9 @@
 {
     "cSpell.words": [
         "Coordf",
-        "powf"
+        "libfontconfig",
+        "libfreetype",
+        "powf",
+        "powi"
     ]
 }

@@ -1,7 +1,11 @@
 mod area;
 mod edge;
+mod intersection;
 mod point;
-use plotters::{prelude::*, style::full_palette::GREEN_700};
+use plotters::{
+    prelude::*,
+    style::full_palette::{GREEN_700, PURPLE},
+};
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Sets up the backend drawing area.
@@ -27,6 +31,29 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         "Area: {}",
         area::for_path(&edge::example_spline().as_path())
     );
+
+    let path1 = edge::example_spline().as_path();
+    let path2 = edge::second_example_spline().as_path();
+    let intersections = intersection::find_intersections(&path1, &path2);
+
+    chart.draw_series(PointSeries::of_element(
+        intersections
+            .iter()
+            .map(|(i, _)| path1[*i])
+            .collect::<Vec<_>>(),
+        6,
+        &PURPLE,
+        &|c, s, st| EmptyElement::at(c) + Circle::new((0, 0), s, st),
+    ))?;
+    chart.draw_series(PointSeries::of_element(
+        intersections
+            .iter()
+            .map(|(_, i)| path2[*i])
+            .collect::<Vec<_>>(),
+        6,
+        &PURPLE,
+        &|c, s, st| EmptyElement::at(c) + Circle::new((0, 0), s, st),
+    ))?;
 
     root.present()?;
 

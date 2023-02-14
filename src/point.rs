@@ -8,9 +8,6 @@ pub struct Point {
 }
 
 impl Point {
-    pub fn new(x: f32, y: f32) -> Point {
-        Point { x, y }
-    }
     pub fn abs(&self) -> f32 {
         (self.x * self.x + self.y * self.y).sqrt()
     }

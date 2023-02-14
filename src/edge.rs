@@ -1,7 +1,4 @@
-use std::{
-    cmp::{max, min},
-    sync::Arc,
-};
+use std::cmp::min;
 
 use crate::point::Point;
 use plotters::{coord::types::RangedCoordf32, prelude::*};
