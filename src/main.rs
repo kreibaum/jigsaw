@@ -35,6 +35,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let path1 = edge::example_spline().as_path();
     let path2 = edge::second_example_spline().as_path();
     let intersections = intersection::find_intersections(&path1, &path2);
+    let diff_area = area::between_normalized_paths(&path1, &path2);
+    println!("Diff area: {}", diff_area);
 
     chart.draw_series(PointSeries::of_element(
         intersections
